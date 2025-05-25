@@ -2,7 +2,7 @@
 
 module adder_tb;
 
-    parameter WIDTH = 32;
+    parameter WIDTH = 31;
 
     // Inputs
     reg [WIDTH-1:0] a;
@@ -57,6 +57,10 @@ module adder_tb;
         $display("Finished.");
         $finish;
     end
-
+initial begin
+  $dumpfile("output/wave.vcd");    // VCD = Value Change Dump
+  $dumpvars(0, adder_tb); // dump all signals in the design
+  // your simulation code
+end
 endmodule
 
