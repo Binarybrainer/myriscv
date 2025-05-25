@@ -20,7 +20,7 @@ end
 
 adder #(.WIDTH(WIDTH)) adder1(
     .a(count),
-    .b('d1),
+    .b({{(WIDTH-1){1'b0}}, 1'b1}),  // 5 in 3 bits, zero-extended to WIDTH,
 
     .sum(nx_count),
     .cout()
