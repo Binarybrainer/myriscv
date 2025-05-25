@@ -2,13 +2,13 @@ module adder#(
     parameter WIDTH = 1
 )(
     //input
-    input wire [0:WIDTH-1]a,
-    input wire [0:WIDTH-1]b,
+    input wire [WIDTH-1:0]a,
+    input wire [WIDTH-1:0]b,
     //output
     output wire cout,
-    output wire [0:WIDTH-1] sum
+    output wire [WIDTH-1:0] sum
 );
-wire [0:WIDTH-1]c;
+wire [WIDTH-1:0]c;
 genvar i; // general variable
 generate
     for (i=0; i < WIDTH; i = i + 1) begin
@@ -37,5 +37,6 @@ generate
     end
 
 endgenerate
+assign cout = c[WIDTH-1];
 endmodule
 
