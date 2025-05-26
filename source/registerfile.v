@@ -1,13 +1,13 @@
 module registerfile#(
     parameter WIDTH = 32,
-    parameter LENGTH = 10
+    parameter LENGTH = 32 // 32 register addresses
 )(
     //input
     input clk,
     input rst,
-    input wire [0:LENGTH-1] address,
+    input wire [0:LENGTH-1] reg_write_en,
     input wire [0:WIDTH -1] write_data,
-    input wire              write_enable,
+    input wire              write_en,
     //output
     output [0:WIDTH-1] read_data
 );
@@ -22,10 +22,13 @@ module registerfile#(
                 regfile[i] <= nx_regfile[i];
             end
         end
-    end
-    always @(posedge clk or negedge rst) begin
-        if (rst) begin
-        end else begin
+        always @* begin
+            if (reg_write_en[i]) begin
+                nx_regfile[i] <= write_data;
+            end else begin
+                nx_regfile[i] <= regfile[i];
+            end
         end
     end
+    assign read_data = regfile[address];
 endmodule
